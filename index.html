@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Trudy 💖</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 💌 Envelope Intro -->
+<div id="envelopeContainer">
+  <div id="envelope">
+    <div class="envelope-back"></div>
+    <div class="envelope-flap"></div>
+    <div class="envelope-heart">❤️</div>
+  </div>
+  <p class="hint">Click the heart 💖</p>
+</div>
+
+<!-- 💖 Main Valentine Content -->
+<div id="valentineContent" class="hidden">
+  <div class="card">
+    <h1>Will you be my Valentine, Trudy? 💖</h1>
+    <div class="buttons">
+      <button id="yesBtn">Yes 💕</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const envelope = document.getElementById('envelope');
+  const envelopeContainer = document.getElementById('envelopeContainer');
+  const valentineContent = document.getElementById('valentineContent');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+
+  // Open envelope
+  envelope.addEventListener('click', () => {
+    envelope.classList.add('open');
+    setTimeout(() => {
+      envelopeContainer.style.display = 'none';
+      valentineContent.classList.remove('hidden');
+    }, 900);
+  });
+
+  // Make No button run away
+  function moveNoButton() {
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    noBtn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+  }
+
+  ['mouseenter', 'touchstart'].forEach(evt => {
+    noBtn.addEventListener(evt, moveNoButton);
+  });
+
+  // YES BUTTON → Romantic Final Screen
+  yesBtn.addEventListener('click', () => {
+    document.body.innerHTML = `
+      <div class="final-screen">
+        <h1>Yay 💕 You just made me the happiest person alive.</h1>
+        <p>I love you more than words can explain. 💖</p>
+        <video autoplay muted playsinline controls>
+          <source src="IMG_2224.MP4" type="video/mp4">
+        </video>
+      </div>
+    `;
+  });
+
+  // Floating flowers
+  function createPeony() {
+    const peony = document.createElement('div');
+    peony.className = 'peony';
+    peony.innerText = '🌸';
+    peony.style.left = Math.random() * 100 + 'vw';
+    peony.style.fontSize = 20 + Math.random() * 20 + 'px';
+    peony.style.animationDuration = 6 + Math.random() * 6 + 's';
+    document.body.appendChild(peony);
+    setTimeout(() => peony.remove(), 12000);
+  }
+
+  setInterval(createPeony, 800);
+</script>
+
+</body>
+</html>
